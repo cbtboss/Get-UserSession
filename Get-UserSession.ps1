@@ -53,7 +53,7 @@ function Get-UserSession {
                     $JobReturn = $null
                 }
                 return $JobReturn
-            }
+            } | out-null
         }
         while ((Get-Job -State Running).count -gt 0) {
             Write-Progress -Status 'Waiting on running jobs' -Activity "There are currently $((get-job -state running).count) jobs running"
