@@ -21,9 +21,9 @@ function Get-UserSession {
     Get-UserSession -Computers $ComputersArrayVariable
     
     .NOTES
-    @Author: Carl Tiede
+    @Author: cbtboss
     @Initial Date: 1/15/2021
-    @blog: carltiede.com
+    @blog: TBD If I will Update this with that yet
     #>
     param (
         # Single remote computer or an array of computers to be checked
