@@ -44,7 +44,6 @@ function Get-UserSession {
             $index ++
             Write-Progress -Activity 'Deploying jobs to query servers' -Status "on $computer which is $index of $($computers.count)" -PercentComplete (($index/$Computers.Count)*100)
             while ((Get-Job -State Running).count -gt 8) {
-                Start-Sleep -Milliseconds 500
             }
             Start-Job -Name $computer -ScriptBlock {
                 if (Test-Connection $using:computer -Count 1 -Quiet) {
