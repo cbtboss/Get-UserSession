@@ -68,7 +68,7 @@ function Get-UserSession {
                     $temp.Server = $job.Name
                     $temp.Username = $sessions[$i].Substring(1, 22).Trim()
                     $temp.SessionName = $sessions[$i].Substring(23, 13).Trim()
-                    $temp.ID = $sessions[$i].Substring(37, 9).Trim()
+                    $temp.ID = [int]($sessions[$i].Substring(37, 9).Trim())
                     $temp.State = $sessions[$i].Substring(46, 8).Trim()
                     $temp.IdleTime = $sessions[$i].Substring(54, 11).Trim()
                     $temp.LogonTime = [datetime]::Parse($sessions[$i].Substring(65).Trim())
