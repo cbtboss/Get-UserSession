@@ -43,7 +43,7 @@ function Get-UserSession {
         foreach ($computer in $Computers) {
             $index ++
             Write-Progress -Activity 'Deploying jobs to query servers' -Status "on $computer which is $index of $($computers.count)" -PercentComplete (($index/$Computers.Count)*100)
-            while ((Get-Job -State Running).count -gt 8) {
+            while ((Get-Job -State Running | Where-Object Name -In $Computers).count -gt 8) {
             }
             Start-Job -Name $computer -ScriptBlock {
                 if (Test-Connection $using:computer -Count 1 -Quiet) {
@@ -55,7 +55,7 @@ function Get-UserSession {
                 return $JobReturn
             } | out-null
         }
-        while ((Get-Job -State Running).count -gt 0) {
+        while ((Get-Job -State Running | Where-Object Name -In $Computers).count -gt 0) {
             Write-Progress -Status 'Waiting on running jobs' -Activity "There are currently $((get-job -state running).count) jobs running"
         }
         $allJobs = Get-Job | Where-Object Name -In $Computers
